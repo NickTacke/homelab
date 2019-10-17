@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/NickTacke/StorageManagement#readme",
   "dependencies": {
+    "jshint": "^2.10.2",
     "nodemon": "^1.19.4",
     "socket.io": "^2.3.0"
   }
