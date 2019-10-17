@@ -4,9 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>Document</title>
 </head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        background-color: rgb(230, 230, 230);
+    }
+    div{
+        position: relative;
+    }
+    .header{
+        background-color: black;
+        color: white;
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: fixed;
+        text-align: center;
+    }
+    .footer{
+        background-color: black;
+        color: white;
+        padding: 5px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .products{
+        position: fixed;
+        color: white;
+        top: 80px;
+        left: 20px;
+        font: menu;
+    }
+    .productbtn{
+        position: fixed;
+        width: 180px;
+        height: 35px;
+        top: 80px;
+        right: 50px;
+    }
+    .productamount{
+        position: fixed;
+        width: 300px;
+        height: 35px;
+        right: 250px;
+        top: 80px;
+    }
+    h3{
+        position: fixed;
+        color: black;
+    }
+    input{
+        text-align: center;
+    }
+</style>
 <body>
-    
+    <section class="header">
+        <div>
+            <h1 style="position: relative; left: 20px;">Voorraad</h1>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 style="top: 80px;">Arduino Uno - MB11</h3>
+                <input placeholder="100 stuks" style="top: 80px;" class="form-control productamount">
+                <button style="top: 80px;" class="btn-success productbtn">Save</button>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-sm-4">
+                    <h3 style="top: 150px;">Arduino Mega</h3>
+                    <input placeholder="100 stuks" style="top: 150px;" class="form-control productamount">
+                    <button style="top: 150px;" class="btn-success productbtn">Save</button>
+                </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div>
+            <h1>©Benselectronics - 2019</h1>
+        </div>
+    </section>
+
+    <script>
+        class Main{
+            constructor(hash){
+                hash = hash.toUpperCase();
+                if(hash == "5D3B65D8F67CBB0E34523B336BEEB3AAA3182DD56D1EAEF43B272C3D6FC19C7F"){
+
+                }
+            }
+        }
+    </script>
 </body>
 </html>
