@@ -1,0 +1,22 @@
+{
+  "name": "storagemanagement",
+  "version": "0.0.1",
+  "description": "A storage management system for Ben's electronics",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickTacke/StorageManagement.git"
+  },
+  "author": "Nick Tacke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickTacke/StorageManagement/issues"
+  },
+  "homepage": "https://github.com/NickTacke/StorageManagement#readme",
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  }
+}
