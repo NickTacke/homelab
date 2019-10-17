@@ -68,9 +68,12 @@
 <body>
     <section class="header">
         <div>
-            <h1 style="position: relative; left: 20px;">Voorraad</h1>
+            <h1 style="position: relative; left: 20px;">Voorraad - Hal</h1>
         </div>
     </section>
+
+    <script src="../js/encryptor.js"></script>
+    <script src="../js/index.js"></script>
 
     <section class="products">
         <div class="row">
@@ -96,14 +99,61 @@
     </section>
 
     <script>
-        class Main{
-            constructor(hash){
-                hash = hash.toUpperCase();
-                if(hash == "5D3B65D8F67CBB0E34523B336BEEB3AAA3182DD56D1EAEF43B272C3D6FC19C7F"){
 
+        class Main{
+            
+
+            constructor(pass){
+                var encrypted = '{"iv":"3QfTkoD3OtxBSOxm1Iys3A==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"2NxDJccCYuY=","ct":"AyymBnWqCGkQbJsxUUPjee9BSihjKEjUiBlW8dz3YmD0Ql8E1zySPI2q+k2MT+GaFRFEtDXnt4DGeFw6U/Bdw+gCFWJxB+47"}'
+                try{
+                    if(sjcl.decrypt(pass, encrypted)){
+                        console.log("Right");
+                        this.changes = {vals: "true true"}
+                    }
+                }catch(error){
+                    console.log("Wrong");
+                    this.changes = {vals: "false false"};
+                }
+                this.pass = pass;
+            }
+
+            vals(getOrSet, pass){
+                let valid;
+                let passCorrect;
+                var encrypted = '{"iv":"3QfTkoD3OtxBSOxm1Iys3A==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"2NxDJccCYuY=","ct":"AyymBnWqCGkQbJsxUUPjee9BSihjKEjUiBlW8dz3YmD0Ql8E1zySPI2q+k2MT+GaFRFEtDXnt4DGeFw6U/Bdw+gCFWJxB+47"}'
+                if(this.changes.vals){
+                    var split = this.changes.vals.split(" ");
+                    valid = split[0];
+                    passCorrect = split[1];
+                    this.changes = {};
+                }
+                try{
+                    if(sjcl.decrypt(pass, encrypted)){
+                        if(getOrSet == "get"){
+                            return valid.toString() + " " + passCorrect.toString()
+                        }else if(getOrSet == "set"){
+                            this.changes.vals = arguments[2] + " " + arguments[3];
+                        }
+                    }
+                }catch(error){
+                    console.log(error)
+                    console.log(valid + " " + passCorrect)
+                    return "WRONG PASSWORD!"
                 }
             }
+
+            Validate(){
+                if(this.vals("get", this.pass) == "true true"){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+
         }
+
+        var main = new Main("BenS");
     </script>
 </body>
 </html>
