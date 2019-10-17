@@ -64,6 +64,18 @@
     input{
         text-align: center;
     }
+    .pass{
+        width: 200px;
+        height: 40px;
+        position: fixed;
+        left: 180px;
+    }
+    .login{
+        width: 150px;
+        height: 40px;
+        position: fixed;
+        left: 400px;
+    }
 </style>
 <body>
     <section class="header">
@@ -75,21 +87,32 @@
     <script src="../js/encryptor.js"></script>
     <script src="../js/index.js"></script>
 
-    <section class="products">
+    <section class="products loginContainer">
+
+
         <div class="row">
             <div class="col-sm-4">
-                <h3 style="top: 80px;">Arduino Uno - MB11</h3>
-                <input placeholder="100 stuks" style="top: 80px;" class="form-control productamount">
-                <button style="top: 80px;" class="btn-success productbtn">Save</button>
+                <h3 style="top: 80px;"> Password: </h3>
+                <input id="PassInput" type="password" style="top: 80px;" class="form-control pass">
+                <button id="LoginButton" style="top: 80px;" class="btn btn-primary login">Login</button>
+            </div>
+        </div>
+
+<!-- 
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 style="top: 140px;">Arduino Uno - MB11</h3>
+                <input placeholder="100 stuks" style="top: 140px;" class="form-control productamount">
+                <button style="top: 140px;" class="btn btn-success productbtn">Save</button>
             </div>
         </div>
         <div class="row">
                 <div class="col-sm-4">
-                    <h3 style="top: 150px;">Arduino Mega</h3>
-                    <input placeholder="100 stuks" style="top: 150px;" class="form-control productamount">
-                    <button style="top: 150px;" class="btn-success productbtn">Save</button>
+                    <h3 style="top: 210px;">Arduino Mega</h3>
+                    <input placeholder="100 stuks" style="top: 210px;" class="form-control productamount">
+                    <button style="top: 210px;" class="btn btn-success productbtn">Save</button>
                 </div>
-        </div>
+        </div> -->
     </section>
 
     <section class="footer">
@@ -115,6 +138,7 @@
                     this.changes = {vals: "false false"};
                 }
                 this.pass = pass;
+                this.amountOfProducts = 0;
             }
 
             vals(getOrSet, pass){
@@ -150,10 +174,62 @@
                 }
             }
 
+            AppendProduct(name, inStock){
+                if(this.Validate()){
+                    var productContainer = document.getElementsByClassName("products")[0];
+
+                    this.amountOfProducts += 1;
+
+                    var topPx = this.amountOfProducts * 140 - 20;
+
+                    var div = document.createElement("div");
+                    div.setAttribute("class", "row");
+                    var container = document.createElement("div");
+                    container.setAttribute("class", "col-sm-4");
+                    var productName = document.createElement("h3");
+                    productName.setAttribute("style", `top: ${topPx}px`);
+                    productName.innerText = name;
+                    var stocks = document.createElement("input");
+                    stocks.setAttribute("placeholder", `${inStock} stuks`);
+                    stocks.setAttribute("style", `top: ${topPx}px`);
+                    stocks.setAttribute("class", "form-control productamount");
+                    var savebtn = document.createElement("button");
+                    savebtn.setAttribute("style", `top: ${topPx}px`);
+                    savebtn.setAttribute("class", "btn btn-success productbtn");
+                    savebtn.innerText = "Save"
+
+                    container.appendChild(productName);
+                    container.appendChild(stocks);
+                    container.appendChild(savebtn);
+                    div.appendChild(container);
+
+                    productContainer.append(div);
+                }
+            }
+
 
         }
 
-        var main = new Main("BenS");
+        var main;
+
+        document.getElementById("LoginButton").addEventListener("click", () => {
+            console.log(document.getElementById("PassInput").value)
+
+            main = new Main(document.getElementById("PassInput").value);
+
+            if(main.Validate()){
+                if(document.getElementById("LoginButton").classList.contains("btn-danger")){
+                    document.getElementById("LoginButton").classList.remove("btn-danger");
+                    document.getElementById("LoginButton").classList.add("btn-success");
+                }else{
+                    document.getElementById("LoginButton").classList.remove("btn-primary");
+                    document.getElementById("LoginButton").classList.add("btn-success");
+                }
+            }else{
+                document.getElementById("LoginButton").classList.remove("btn-primary");
+                document.getElementById("LoginButton").classList.add("btn-danger");
+            }
+        });
     </script>
 </body>
 </html>
