@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run msg && npm run init",
-    "msg": "@echo Starting server!",
-    "init": "nodemon js/server.js"
+    "msg": "echo Starting server!",
+    "init": "nodemon js/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,10 @@
   },
   "homepage": "https://github.com/NickTacke/StorageManagement#readme",
   "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "jshint": "^2.10.2",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.4",
     "socket.io": "^2.3.0"
   }
