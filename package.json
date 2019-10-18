@@ -1,0 +1,30 @@
+{
+  "name": "homelab",
+  "version": "0.0.1",
+  "description": "A self-hosted dashboard for watching over a home lab",
+  "main": "server.js",
+  "scripts": {
+    "init": "npm run msg && npm run init",
+    "msg": "echo Starting server!",
+    "start": "nodemon js/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickTacke/homelab.git"
+  },
+  "author": "Nick Tacke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickTacke/homelab/issues"
+  },
+  "homepage": "https://github.com/NickTacke/homelab#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jshint": "^2.10.2",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.4",
+    "socket.io": "^2.3.0"
+  }
+}
