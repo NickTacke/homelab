@@ -14,9 +14,9 @@ io1.sockets.on('connection', function (socket) {
                 .then((data) => {
                     var split = data.split(" ");
                     for(i = 0; i < split.length; i++){
-                        if(split[i].includes("%20")){
+                        if(split[i].includes(">nbsp<")){
                             console.log("true");
-                            var elsplit = split[i].split("%20");
+                            var elsplit = split[i].split(">nbsp<");
                             split[i] = elsplit.join(" ");
                             console.log(split[i]);
                         }
@@ -28,6 +28,12 @@ io1.sockets.on('connection', function (socket) {
 
     socket.on("addProduct", (data) =>{
         console.log(data);
+        console.log(data.add);
+        if(data.add.includes(" ")){
+            var datasplit = data.add.split(" ");
+            data.add = datasplit.join(">nbsp<");
+            console.log(data.add)
+        }
         fetch('https://vexar.xyz/api/products.php?validation=' + data.validation + '&add=' + data.add)
         .then((response) => response.text())
         .then((data) =>{
