@@ -59,7 +59,7 @@
         right: 130px;
     }
 
-    .editbtn{
+    .editbtn {
         position: fixed;
         width: 90px;
         height: 35px;
@@ -155,32 +155,32 @@
                 </div>
             </div>
         </div>
-        
+
 
     </div>
 
     <div id="changeProductModal" class="modal">
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h3 style="position: relative; left: 140%; top: -25px;">
-                            Product
-                        </h3>
-                        <input style="position: relative; width: 1490px; top: -10px; text-align: center;" type="text"
-                            id="changeTitle" placeholder="Titel">
-                        <button style="color:white; top:10px; left: 250px; position: relative;" class="btn btn-danger" id="deleteButton">Verwijder</button>
-                        <button
-                            style="color: white; top: 10px; left: 250px; position: relative;"
-                            class="btn btn-success" id="productchangebtn">Pas aan</button>
-                    </div>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3 style="position: relative; left: 140%; top: -25px;">
+                        Product
+                    </h3>
+                    <input style="position: relative; width: 1490px; top: -10px; text-align: center;" type="text"
+                        id="changeTitle" placeholder="Titel">
+                    <button style="color:white; top:10px; left: 250px; position: relative;" class="btn btn-danger"
+                        id="deleteButton">Verwijder</button>
+                    <button style="color: white; top: 10px; left: 250px; position: relative;" class="btn btn-success"
+                        id="productchangebtn">Pas aan</button>
                 </div>
             </div>
-            
-    
         </div>
+
+
+    </div>
 
 
     <section class="header">
@@ -207,7 +207,10 @@
 
     <section class="footer">
         <div>
-            <button class="btn btn-success" id="addProduct">Add product</button>
+            <button class="btn btn-info" id="leftPage">
+                <-</button> <button class="btn btn-success" id="addProduct">Add product
+            </button>
+            <button class="btn btn-info" id="rightPage">-></button>
             <h1>©Benselectronics - 2019</h1>
         </div>
     </section>
@@ -219,7 +222,7 @@
 
             constructor(pass) {
                 var encrypted =
-                    '{"iv":"3QfTkoD3OtxBSOxm1Iys3A==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"2NxDJccCYuY=","ct":"AyymBnWqCGkQbJsxUUPjee9BSihjKEjUiBlW8dz3YmD0Ql8E1zySPI2q+k2MT+GaFRFEtDXnt4DGeFw6U/Bdw+gCFWJxB+47"}'
+                    '{"iv":"kpNoAxjyJVTPOIYLArRcHA==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"ju0gKPHQMSw=","ct":"rJXxI1/iWQsLRScUSMiqZokqdVnHQAnX"}'
                 try {
                     if (sjcl.decrypt(pass, encrypted)) {
                         console.log("Right");
@@ -242,7 +245,7 @@
                 var valid = false;
                 var passCorrect = false;
                 var encrypted =
-                    '{"iv":"3QfTkoD3OtxBSOxm1Iys3A==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"2NxDJccCYuY=","ct":"AyymBnWqCGkQbJsxUUPjee9BSihjKEjUiBlW8dz3YmD0Ql8E1zySPI2q+k2MT+GaFRFEtDXnt4DGeFw6U/Bdw+gCFWJxB+47"}'
+                    '{"iv":"kpNoAxjyJVTPOIYLArRcHA==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"ju0gKPHQMSw=","ct":"rJXxI1/iWQsLRScUSMiqZokqdVnHQAnX"}'
                 if (this.changes.vals) {
                     var split = this.changes.vals.split(" ");
                     valid = split[0];
@@ -303,12 +306,45 @@
                 }
             }
 
+            reverseFormula(y) {
+                return (y - 140) / 50;
+            }
+
+            getHeight(element) {
+                var attrArray = element.getAttribute("style").split(": ");
+                for (i = 0; i < attrArray.length; i++) {
+                    if (attrArray[i] == "top") {
+                        var pxIndex = attrArray[i + 1].indexOf("px");
+                        var returnVal = attrArray[i + 1].substr(0, pxIndex);
+                        return returnVal;
+                    }
+                }
+            }
+
+            getNameAtIndex(index) {
+                var removals = document.getElementsByClassName("removal")[index];
+                var col = removals.children[0];
+                var h3 = col.children[0];
+                return h3.innerText;
+            }
+
+            getStockAtIndex(index) {
+                var removals = document.getElementsByClassName("removal")[index];
+                var col = removals.children[0];
+                var stock = col.children[1];
+                if (stock.placeholder.indexOf(" ") == 0) {
+                    stock.placeholder = stock.placeholder.substr(1, stock.placeholder.length);
+                }
+                var parsed = stock.placeholder.split(" ");
+                return parsed[0];
+            }
+
             AppendProduct(name, inStock) {
                 if (this.Validate()) {
                     var productContainer = document.getElementsByClassName("products")[0];
 
                     this.amountOfProducts += 1;
-                    this.products[name] = inStock;
+                    this.products[`${this.amountOfProducts}`] = inStock;
 
                     var topPx = this.amountOfProducts == 1 ? topPx = 140 : topPx = (this.amountOfProducts - 1) *
                         50 + 140
@@ -337,7 +373,7 @@
                     container.appendChild(stocks);
                     container.appendChild(savebtn);
                     container.appendChild(editbtn);
-                    
+
                     div.appendChild(container);
 
                     productContainer.append(div);
@@ -352,16 +388,16 @@
         var MAX_PRODUCTS_ON_PAGE = Math.floor((window.innerHeight - 140) / 50 - 3);
         var loggedPass = document.URL.split("&")[1];
         var pass = "";
-        if(loggedPass != undefined){
+        if (loggedPass != undefined) {
             pass = loggedPass.split("=")[1];
         }
 
         document.getElementById("LoginButton").addEventListener("click", () => {
             console.log(document.getElementById("PassInput").value)
 
-            if(pass.length >= 1){
+            if (pass.length >= 1) {
                 main = new Main(pass);
-            }else{
+            } else {
                 main = new Main(document.getElementById("PassInput").value);
             }
 
@@ -378,34 +414,62 @@
 
                 socket.emit("getdata", main.Validate());
 
+                document.getElementById("leftPage").addEventListener("click", (event) => {
+                    var currentPage = document.URL.split("?")[1];
+                    if (currentPage.includes("&")) {
+                        currentPage = currentPage.substr(0, currentPage.indexOf("&"));
+                    }
+                    currentPage = currentPage.split("=")[1];
+                    console.log(currentPage)
+                    var toPage = parseInt(currentPage) - 1;
+                    if (toPage != 0) {
+                        window.location = "http://127.0.0.1:5500/html/index.html?page=" + toPage
+                            .toString() + "&pass=" + main.pass;
+                    }
+                })
+
+                document.getElementById("rightPage").addEventListener("click", (event) => {
+                    var currentPage = document.URL.split("?")[1];
+                    if (currentPage.includes("&")) {
+                        currentPage = currentPage.substr(0, currentPage.indexOf("&"));
+                    }
+                    currentPage = currentPage.split("=")[1];
+                    console.log(currentPage)
+                    var toPage = parseInt(currentPage) + 1;
+                    window.location = "http://127.0.0.1:5500/html/index.html?page=" + toPage
+                    .toString() + "&pass=" + main.pass;
+                })
 
                 socket.on("callbackGetData", (data) => {
-                    console.log(data);
+                    console.log("DATA !!");
                     var params = document.URL.split("?");
                     var multiArray = params[1].split("&");
 
-                    if(params[1].split("=")[1].includes("&")){
+                    if (params[1].split("=")[1].includes("&")) {
                         params = params[1].split("=")[1].split("&")[0];
-                    }else{
+                    } else {
                         params = params[1].split("=")[1];
                     }
 
-                    var forI = parseInt(params) == 1 ? forI = 0 : forI = (parseInt(params) - 1) * MAX_PRODUCTS_ON_PAGE;
+                    var forI = parseInt(params) == 1 ? forI = 0 : forI = (parseInt(params) - 1) *
+                        MAX_PRODUCTS_ON_PAGE;
                     console.log(forI);
                     console.log(params);
-                    for(i = forI; i < parseInt(params) * MAX_PRODUCTS_ON_PAGE; i++){
-                        if(data[i] == null || data[i] == undefined){
-                            return;
+                    for (i = forI; i < parseInt(params) * MAX_PRODUCTS_ON_PAGE; i++) {
+                        if (data[i] != undefined) {
+                            console.log(data[i]);
+                            var split = data[i].split(">n<");
+                            main.AppendProduct(split[0], split[1]);
                         }
-                        console.log(data[i]);
-                        var split = data[i].split(">n<");
-                        main.AppendProduct(split[0], split[1]);
                     }
+                    console.log("before sleep");
                     var sleep = new Promise((resolve, reject) => {
                         setTimeout(() => {
+                            console.log("slept")
                             resolve("done");
                         }, 1000)
                     }).then((data) => {
+                        console.log("GOING HERE")
                         var modal2 = document.getElementById("changeProductModal");
                         var productbuttons = document.getElementsByClassName("productbtn");
                         var editbuttons = document.getElementsByClassName("editbtn");
@@ -414,26 +478,61 @@
                                 console.log(event.srcElement);
                                 var btn = event.srcElement;
 
-                                btn.classList.remove("btn-info");
+                                var text = btn.parentElement.children[0].innerText;
+                                var stock = btn.parentElement.children[1].placeholder
+                                    .split(" ")[0];
+
+                                var newStock = btn.parentElement.children[1].value;
+
+                                if (newStock.length >= 1) {
+
+                                    text = text.replace(/ /g, ">nbsp<");
+
+                                    btn.classList.remove("btn-info");
 
 
-                                btn.classList.add("btn-success");
 
-                                var sleep = new Promise((resolve, reject) =>{
-                                    setTimeout(() =>{
-                                        resolve("done");
-                                    }, 2000)
-                                }).then((data) =>{
-                                    btn.classList.remove("btn-success");
+                                    socket.emit("changeProduct", {
+                                        validation: main.Validate("hashed"),
+                                        old: text + ">n<" + stock,
+                                        change: text + ">n<" + newStock
+                                    })
+
+                                    btn.classList.add("btn-success");
+
+                                    var sleep = new Promise((resolve, reject) => {
+                                        setTimeout(() => {
+                                            resolve("done");
+                                        }, 1000)
+                                    }).then((data) => {
+                                        btn.classList.remove("btn-success");
 
 
-                                    btn.classList.add("btn-info");
-                                })
+                                        btn.classList.add("btn-info");
+                                    })
+                                } else {
+                                    btn.classList.add("btn-danger");
+
+                                    var sleep = new Promise((resolve, reject) => {
+                                        setTimeout(() => {
+                                            resolve("done");
+                                        }, 1000)
+                                    }).then((data) => {
+                                        btn.classList.remove("btn-danger");
+
+
+                                        btn.classList.add("btn-info");
+                                    })
+                                }
                             })
                         }
-                        for(i = 0; i < editbuttons.length; i++){
-                            editbuttons.item(i).addEventListener("click", (event) =>{
+                        for (i = 0; i < editbuttons.length; i++) {
+                            editbuttons.item(i).addEventListener("click", (event) => {
+                                console.log(event)
                                 var btn = event.srcElement;
+                                modal2.selectedElement = main.reverseFormula(main
+                                    .getHeight(btn));
+                                console.log(btn)
 
                                 btn.classList.remove("btn-danger");
 
@@ -441,11 +540,11 @@
 
                                 btn.classList.add("btn-success");
 
-                                var sleep = new Promise((resolve, reject) =>{
-                                    setTimeout(() =>{
+                                var sleep = new Promise((resolve, reject) => {
+                                    setTimeout(() => {
                                         resolve("done");
-                                    }, 2000)
-                                }).then((data) =>{
+                                    }, 1000)
+                                }).then((data) => {
                                     btn.classList.remove("btn-success");
 
 
@@ -470,18 +569,47 @@
 
                 var modal2 = document.getElementById("changeProductModal")
                 var title = document.getElementById("changeTitle");
-                document.getElementById("productchangebtn").addEventListener("click", (event) =>{
+                document.getElementById("productchangebtn").addEventListener("click", (event) => {
+                    var data = modal2.selectedElement;
+                    var oldName = main.getNameAtIndex(data);
+                    var oldStock = main.getStockAtIndex(data);
+
+                    var newName = title.value;
+
+                    newName = newName.replace(/ /g, ">nbsp<");
+                    oldName = oldName.replace(/ /g, ">nbsp<");
+
+                    console.log(oldName)
+
                     socket.emit("changeProduct", {
                         validation: main.Validate("hashed"),
-                        change: title.name
+                        change: newName + ">n<" + oldStock,
+                        old: oldName + ">n<" + oldStock
                     });
                     modal2.style.display = "none";
                 })
 
-                socket.on("callbackAddProduct", (data) => {
+
+                socket.on("reload", (data) => {
                     console.log(data);
                     main.DeleteProducts();
                     socket.emit("getdata", main.Validate());
+                })
+
+                document.getElementById("deleteButton").addEventListener("click", (event) => {
+                    var prdctname = main.getNameAtIndex(modal2.selectedElement);
+                    var prdctstock = main.getStockAtIndex(modal2.selectedElement);
+
+                    prdctname = prdctname.replace(/ /g, ">nbsp<");
+
+                    var todelete = prdctname + ">n<" + prdctstock;
+
+                    modal2.style.display = "none";
+
+                    socket.emit("deleteProduct", {
+                        validation: main.Validate("hashed"),
+                        delete: todelete
+                    })
                 })
 
 
@@ -491,7 +619,7 @@
             }
         });
 
-        if(pass.length >= 1){
+        if (pass.length >= 1) {
             document.getElementById("LoginButton").click();
         }
     </script>
@@ -517,15 +645,15 @@
             modal.style.display = "none";
         }
 
-        span2.onclick = function(){
+        span2.onclick = function () {
             modal2.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
-                modal.style.display = "none"; 
-            }else if(event.target == modal2){
+                modal.style.display = "none";
+            } else if (event.target == modal2) {
                 modal2.style.display = "none";
             }
         }

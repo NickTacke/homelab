@@ -1,6 +1,7 @@
+// golf fruit APPLE apple DRIP park VISA coffee jack USA visa golf omelet skype queen xbox
+
 var io1 = require('socket.io').listen(8001);
 const fetch = require('node-fetch');
-const fs = require('fs');
 
 io1.sockets.on('connection', function (socket) {
 
@@ -21,7 +22,14 @@ io1.sockets.on('connection', function (socket) {
                             console.log(split[i]);
                         }
                     }
-                    socket.emit("callbackGetData", split);
+                    var sleep = new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            resolve("done");
+                        }, 1000)
+                    }).then(() => {
+                        socket.emit("callbackGetData", split);
+                        console.log("EMITTED CALLBACK")
+                    })                    
                 })
         }
     })
@@ -38,7 +46,26 @@ io1.sockets.on('connection', function (socket) {
         .then((response) => response.text())
         .then((data) =>{
             console.log(data);
-            socket.emit("callbackAddProduct", data);
+            socket.emit("reload", data);
+        })
+    })
+
+    socket.on("changeProduct", (data) => {
+        fetch('https://vexar.xyz/api/products.php?validation=' + data.validation + '&change=' + data.old + '&to=' + data.change)
+        .then((response) => response.text())
+        .then((data) => {
+            console.log(data);
+            socket.emit("reload", data);
+        })
+    })
+
+    socket.on("deleteProduct", (data) => {
+        console.log(data);
+        fetch('https://vexar.xyz/api/products.php?validation=' + data.validation + '&delete=' + data.delete)
+        .then((response) => response.text())
+        .then((data) => {
+            console.log(data);
+            socket.emit("reload", data);
         })
     })
 });
