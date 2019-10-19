@@ -145,9 +145,9 @@
                     <h3 style="position: relative; left: 142.5%; top: -25px;">
                         Product
                     </h3>
-                    <input style="position: relative; width: 320%; top: -10px; text-align: center;" type="text"
+                    <input style="position: relative; width: 1490px; top: -10px; text-align: center;" type="text"
                         id="productTitle" placeholder="Titel">
-                    <input style="position: relative; width: 320%; text-align: center;" type="text" id="productAmount"
+                    <input style="position: relative; width: 1490px; text-align: center;" type="text" id="productAmount"
                         placeholder="Voorraad">
                     <button
                         style="color: white; align-content: center; align-self: center; text-align: center; vertical-align: middle; top: 10px; left: 142.5%; position: relative;"
@@ -169,7 +169,7 @@
                         <h3 style="position: relative; left: 140%; top: -25px;">
                             Product
                         </h3>
-                        <input style="position: relative; width: 320%; top: -10px; text-align: center;" type="text"
+                        <input style="position: relative; width: 1490px; top: -10px; text-align: center;" type="text"
                             id="changeTitle" placeholder="Titel">
                         <button style="color:white; top:10px; left: 250px; position: relative;" class="btn btn-danger" id="deleteButton">Verwijder</button>
                         <button
@@ -235,6 +235,7 @@
                 }
                 this.pass = pass;
                 this.amountOfProducts = 0;
+                this.products = {};
             }
 
             vals(getOrSet, pass) {
@@ -307,6 +308,7 @@
                     var productContainer = document.getElementsByClassName("products")[0];
 
                     this.amountOfProducts += 1;
+                    this.products[name] = inStock;
 
                     var topPx = this.amountOfProducts == 1 ? topPx = 140 : topPx = (this.amountOfProducts - 1) *
                         50 + 140
@@ -347,7 +349,7 @@
 
         var main;
         var socket = io('http://localhost:8001');
-        var MAX_PRODUCTS_ON_PAGE = 8;
+        var MAX_PRODUCTS_ON_PAGE = Math.floor((window.innerHeight - 140) / 50 - 3);
         var loggedPass = document.URL.split("&")[1];
         var pass = "";
         if(loggedPass != undefined){
@@ -357,7 +359,7 @@
         document.getElementById("LoginButton").addEventListener("click", () => {
             console.log(document.getElementById("PassInput").value)
 
-            if(pass != undefined){
+            if(pass.length >= 1){
                 main = new Main(pass);
             }else{
                 main = new Main(document.getElementById("PassInput").value);
@@ -388,10 +390,10 @@
                         params = params[1].split("=")[1];
                     }
 
-                    var forI = parseInt(params) == 1 ? forI = 0 : forI = (parseInt(params) - 1) * 8;
+                    var forI = parseInt(params) == 1 ? forI = 0 : forI = (parseInt(params) - 1) * MAX_PRODUCTS_ON_PAGE;
                     console.log(forI);
                     console.log(params);
-                    for(i = forI; i < parseInt(params) * 8; i++){
+                    for(i = forI; i < parseInt(params) * MAX_PRODUCTS_ON_PAGE; i++){
                         if(data[i] == null || data[i] == undefined){
                             return;
                         }
@@ -489,7 +491,7 @@
             }
         });
 
-        if(pass != undefined){
+        if(pass.length >= 1){
             document.getElementById("LoginButton").click();
         }
     </script>
