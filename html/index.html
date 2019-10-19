@@ -170,11 +170,11 @@
                             Product
                         </h3>
                         <input style="position: relative; width: 320%; top: -10px; text-align: center;" type="text"
-                            id="productTitle" placeholder="Titel">
+                            id="changeTitle" placeholder="Titel">
                         <button style="color:white; top:10px; left: 250px; position: relative;" class="btn btn-danger" id="deleteButton">Verwijder</button>
                         <button
                             style="color: white; top: 10px; left: 250px; position: relative;"
-                            class="btn btn-success" id="productaddbtn">Pas aan</button>
+                            class="btn btn-success" id="productchangebtn">Pas aan</button>
                     </div>
                 </div>
             </div>
@@ -381,10 +381,17 @@
                     console.log(data);
                     var params = document.URL.split("?");
                     var multiArray = params[1].split("&");
-                    var forI = parseInt(params[1].split("=")[1]) == 1 ? forI = 0 : forI = (parseInt(params[1].split("=")[1]) - 1) * 8;
+
+                    if(params[1].split("=")[1].includes("&")){
+                        params = params[1].split("=")[1].split("&")[0];
+                    }else{
+                        params = params[1].split("=")[1];
+                    }
+
+                    var forI = parseInt(params) == 1 ? forI = 0 : forI = (parseInt(params) - 1) * 8;
                     console.log(forI);
-                    console.log(params[1].split("=")[1]);
-                    for(i = forI; i < parseInt(params[1].split("=")[1]) * 8; i++){
+                    console.log(params);
+                    for(i = forI; i < parseInt(params) * 8; i++){
                         if(data[i] == null || data[i] == undefined){
                             return;
                         }
@@ -447,7 +454,7 @@
                     })
 
                 })
-                var modal = document.getElementById("myModal");
+                var modal = document.getElementById("addProductModal");
                 var titel = document.getElementById("productTitle");
                 var amount = document.getElementById("productAmount");
                 document.getElementById("productaddbtn").addEventListener("click", (event) => {
@@ -457,6 +464,16 @@
                     })
                     modal.style.display = 'none';
                     console.log("emitted");
+                })
+
+                var modal2 = document.getElementById("changeProductModal")
+                var title = document.getElementById("changeTitle");
+                document.getElementById("productchangebtn").addEventListener("click", (event) =>{
+                    socket.emit("changeProduct", {
+                        validation: main.Validate("hashed"),
+                        change: title.name
+                    });
+                    modal2.style.display = "none";
                 })
 
                 socket.on("callbackAddProduct", (data) => {
