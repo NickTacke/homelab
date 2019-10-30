@@ -3,3 +3,4 @@
 - documented the panel-subscription lifecycle
 - added the deployment quick start
 - added the site-health scoring
+- documented the intrusion-trip debouncing
