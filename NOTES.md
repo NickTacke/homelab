@@ -4,3 +4,4 @@
 - added the deployment quick start
 - added the site-health scoring
 - documented the intrusion-trip debouncing
+- build: bound the push fan-out
