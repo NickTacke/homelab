@@ -20,6 +20,7 @@ console.log("Started server");
 io1.sockets.on('connection', function (socket) {
 
     console.log("NEW USER!")
+    socket.broadcast("newUser", {socket: socket});
 
     socket.on("getdata", (data) => {
         console.log(data);
