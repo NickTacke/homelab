@@ -4,6 +4,9 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io1 = require('socket.io')(http);
 var port = process.env.PORT || 3000;
+if(port > 9000){
+    port = 9001;
+}
 
 const fetch = require('node-fetch');
 
