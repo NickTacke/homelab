@@ -1,7 +1,16 @@
 // golf fruit APPLE apple DRIP park VISA coffee jack USA visa golf omelet skype queen xbox
+//gfAaDpVcjUvgosqx
+var app = require('express')();
+var http = require('http').Server(app);
+var io1 = require('socket.io')(http);
+var port = process.env.PORT || 3000;
 
-var io1 = require('socket.io').listen(8001);
 const fetch = require('node-fetch');
+
+app.get('/', function(req, res){
+    res.sendFile(__dirname + '.../html/index.html');
+});
+  
 
 console.log("Started server");
 
@@ -71,3 +80,7 @@ io1.sockets.on('connection', function (socket) {
         })
     })
 });
+
+http.listen(port, function(){
+    console.log('listening on *:' + port);
+  });
