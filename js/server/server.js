@@ -3,6 +3,8 @@
 var io1 = require('socket.io').listen(8001);
 const fetch = require('node-fetch');
 
+console.log("Started server");
+
 io1.sockets.on('connection', function (socket) {
 
     console.log("NEW USER!")
