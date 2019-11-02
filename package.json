@@ -4,9 +4,9 @@
   "description": "A storage management system for Ben's electronics",
   "main": "server.js",
   "scripts": {
-    "start": "npm run msg && npm run init",
+    "init": "npm run msg && npm run init",
     "msg": "echo Starting server!",
-    "init": "nodemon js/server/server.js"
+    "start": "nodemon js/server/server.js"
   },
   "repository": {
     "type": "git",
