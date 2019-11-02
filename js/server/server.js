@@ -8,7 +8,7 @@ var port = process.env.PORT || 3000;
 const fetch = require('node-fetch');
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '.../html/index.html');
+    res.sendFile(__dirname + 'serverholder.html');
 });
   
 
