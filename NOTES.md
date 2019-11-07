@@ -6,3 +6,4 @@
 - documented the intrusion-trip debouncing
 - build: bound the push fan-out
 - documented the authentication assumptions
+- documented the offline-detection semantics
