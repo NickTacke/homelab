@@ -7,3 +7,4 @@
 - build: bound the push fan-out
 - documented the authentication assumptions
 - documented the offline-detection semantics
+- build: pin the 2019 node runtime
