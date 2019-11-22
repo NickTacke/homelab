@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(230, 230, 230);
+    }
+
+    div {
+        position: relative;
+    }
+
+    .header {
+        background-color: black;
+        color: white;
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: fixed;
+        text-align: center;
+    }
+
+    .footer {
+        background-color: black;
+        color: white;
+        padding: 5px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .products {
+        position: fixed;
+        color: white;
+        top: 80px;
+        left: 20px;
+        font: menu;
+    }
+
+    .productbtn {
+        position: fixed;
+        width: 90px;
+        height: 35px;
+        top: 80px;
+        right: 130px;
+    }
+
+    .editbtn {
+        position: fixed;
+        width: 90px;
+        height: 35px;
+        top: 80px;
+        right: 20px;
+    }
+
+    .productamount {
+        position: fixed;
+        width: 300px;
+        height: 35px;
+        right: 250px;
+        top: 80px;
+    }
+
+    h3 {
+        position: fixed;
+        color: black;
+    }
+
+    input {
+        text-align: center;
+    }
+
+    .pass {
+        width: 200px;
+        height: 40px;
+        position: fixed;
+        left: 180px;
+    }
+
+    .login {
+        width: 150px;
+        height: 40px;
+        position: fixed;
+        left: 400px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+</style>
+
+<body>
+
+
+    <div id="addProductModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3 style="position: relative; left: 142.5%; top: -25px;">
+                        Product
+                    </h3>
+                    <input style="position: relative; width: 1490px; top: -10px; text-align: center;" type="text"
+                        id="productTitle" placeholder="Titel">
+                    <input style="position: relative; width: 1490px; text-align: center;" type="text" id="productAmount"
+                        placeholder="Voorraad">
+                    <button
+                        style="color: white; align-content: center; align-self: center; text-align: center; vertical-align: middle; top: 10px; left: 142.5%; position: relative;"
+                        class="btn btn-success" id="productaddbtn">Voeg toe</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="changeProductModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3 style="position: relative; left: 140%; top: -25px;">
+                        Product
+                    </h3>
+                    <input style="position: relative; width: 1490px; top: -10px; text-align: center;" type="text"
+                        id="changeTitle" placeholder="Titel">
+                    <button style="color:white; top:10px; left: 250px; position: relative;" class="btn btn-danger"
+                        id="deleteButton">Verwijder</button>
+                    <button style="color: white; top: 10px; left: 250px; position: relative;" class="btn btn-success"
+                        id="productchangebtn">Pas aan</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <section class="header">
+        <div>
+            <h1 style="position: relative; left: 20px;">Voorraad - Hal</h1>
+        </div>
+    </section>
+
+    <script src="../js/encryptor.js"></script>
+    <script src="../js/index.js"></script>
+
+    <section class="products loginContainer">
+
+
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 style="top: 80px;"> Password: </h3>
+                <input id="PassInput" type="password" style="top: 80px;" class="form-control pass">
+                <button id="LoginButton" style="top: 80px;" class="btn btn-primary login">Login</button>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="footer">
+        <div>
+            <button class="btn btn-info" id="leftPage">
+                <-</button> <button class="btn btn-success" id="addProduct">Add product
+            </button>
+            <button class="btn btn-info" id="rightPage">-></button>
+            <h1>©Benselectronics - 2019</h1>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <script defer>
+
+        if(window.location.href.indexOf("?") == -1){
+            window.location.href = window.location.href + "?page=1";
+        }
+
+        class Main {
+
+
+            constructor(pass) {
+                var encrypted =
+                    '{"iv":"kpNoAxjyJVTPOIYLArRcHA==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"ju0gKPHQMSw=","ct":"rJXxI1/iWQsLRScUSMiqZokqdVnHQAnX"}'
+                try {
+                    if (sjcl.decrypt(pass, encrypted)) {
+                        console.log("Right");
+                        this.changes = {
+                            vals: "true true"
+                        }
+                    }
+                } catch (error) {
+                    console.log("Wrong");
+                    this.changes = {
+                        vals: "false false"
+                    };
+                }
+                this.pass = pass;
+                this.amountOfProducts = 0;
+                this.products = {};
+            }
+
+            vals(getOrSet, pass) {
+                var valid = false;
+                var passCorrect = false;
+                var encrypted =
+                    '{"iv":"kpNoAxjyJVTPOIYLArRcHA==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"ju0gKPHQMSw=","ct":"rJXxI1/iWQsLRScUSMiqZokqdVnHQAnX"}'
+                if (this.changes.vals) {
+                    var split = this.changes.vals.split(" ");
+                    valid = split[0];
+                    passCorrect = split[1];
+                    this.changes = {};
+                } else {
+                    try {
+                        if (sjcl.decrypt(pass, encrypted)) {
+                            valid = true;
+                            passCorrect = true;
+                        }
+                    } catch (error) {
+                        valid = false;
+                        passCorrect = false;
+                    }
+                }
+                try {
+                    if (sjcl.decrypt(pass, encrypted)) {
+                        if (getOrSet == "get") {
+                            return valid.toString() + " " + passCorrect.toString()
+                        } else if (getOrSet == "set") {
+                            this.changes.vals = arguments[2] + " " + arguments[3];
+                        }
+                    }
+                } catch (error) {
+                    console.log(error)
+                    console.log(valid + " " + passCorrect)
+                    return "WRONG PASSWORD!"
+                }
+            }
+
+            Validate() {
+                var hashes = ["b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+                    "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+                ];
+                if (arguments[0] != "hashed") {
+                    if (this.vals("get", this.pass) == "true true") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    if (this.vals("get", this.pass) == "true true") {
+                        return hashes[0];
+                    } else {
+                        return hashes[1];
+                    }
+                }
+            }
+
+            DeleteProducts() {
+                if (this.Validate()) {
+                    var removals = document.getElementsByClassName("removal");
+                    while (removals.length > 0) {
+                        removals[0].remove();
+                    }
+                    this.amountOfProducts = 0;
+                }
+            }
+
+            reverseFormula(y) {
+                return (y - 140) / 50;
+            }
+
+            getHeight(element) {
+                var attrArray = element.getAttribute("style").split(": ");
+                for (i = 0; i < attrArray.length; i++) {
+                    if (attrArray[i] == "top") {
+                        var pxIndex = attrArray[i + 1].indexOf("px");
+                        var returnVal = attrArray[i + 1].substr(0, pxIndex);
+                        return returnVal;
+                    }
+                }
+            }
+
+            getNameAtIndex(index) {
+                var removals = document.getElementsByClassName("removal")[index];
+                var col = removals.children[0];
+                var h3 = col.children[0];
+                return h3.innerText;
+            }
+
+            getStockAtIndex(index) {
+                var removals = document.getElementsByClassName("removal")[index];
+                var col = removals.children[0];
+                var stock = col.children[1];
+                if (stock.placeholder.indexOf(" ") == 0) {
+                    stock.placeholder = stock.placeholder.substr(1, stock.placeholder.length);
+                }
+                var parsed = stock.placeholder.split(" ");
+                return parsed[0];
+            }
+
+            AppendProduct(name, inStock) {
+                if (this.Validate()) {
+                    var productContainer = document.getElementsByClassName("products")[0];
+
+                    this.amountOfProducts += 1;
+                    this.products[`${this.amountOfProducts}`] = inStock;
+
+                    var topPx = this.amountOfProducts == 1 ? topPx = 140 : topPx = (this.amountOfProducts - 1) *
+                        50 + 140
+
+                    var div = document.createElement("div");
+                    div.setAttribute("class", "row removal");
+                    var container = document.createElement("div");
+                    container.setAttribute("class", "col-sm-4");
+                    var productName = document.createElement("h3");
+                    productName.setAttribute("style", `top: ${topPx}px`);
+                    productName.innerText = name;
+                    var stocks = document.createElement("input");
+                    stocks.setAttribute("placeholder", `${inStock} stuks`);
+                    stocks.setAttribute("style", `top: ${topPx}px`);
+                    stocks.setAttribute("class", "form-control productamount");
+                    var savebtn = document.createElement("button");
+                    savebtn.setAttribute("style", `top: ${topPx}px`);
+                    savebtn.setAttribute("class", "btn btn-info productbtn");
+                    savebtn.innerText = "Save"
+                    var editbtn = document.createElement("button");
+                    editbtn.setAttribute("style", `top: ${topPx}px`);
+                    editbtn.setAttribute("class", "btn btn-danger editbtn");
+                    editbtn.innerText = "Edit";
+
+                    container.appendChild(productName);
+                    container.appendChild(stocks);
+                    container.appendChild(savebtn);
+                    container.appendChild(editbtn);
+
+                    div.appendChild(container);
+
+                    productContainer.append(div);
+                }
+            }
+
+
+        }
+
+        var main;
+        var socket = io('https://bensmanagement.herokuapp.com');
+        socket.on("message", (data) => {
+                    console.log(data);
+                })
+        var MAX_PRODUCTS_ON_PAGE = Math.floor((window.innerHeight - 140) / 50 - 3);
+        var loggedPass = document.URL.split("&")[1];
+        var pass = "";
+        if (loggedPass != undefined) {
+            pass = loggedPass.split("=")[1];
+        }
+
+        document.getElementById("LoginButton").addEventListener("click", () => {
+            console.log(document.getElementById("PassInput").value)
+
+            if (pass.length >= 1) {
+                main = new Main(pass);
+            } else {
+                main = new Main(document.getElementById("PassInput").value);
+            }
+
+            if (main.Validate()) {
+                if (document.getElementById("LoginButton").classList.contains("btn-danger")) {
+                    document.getElementById("LoginButton").classList.remove("btn-danger");
+                    document.getElementById("LoginButton").classList.add("btn-success");
+                } else {
+                    document.getElementById("LoginButton").classList.remove("btn-primary");
+                    document.getElementById("LoginButton").classList.add("btn-success");
+                }
+
+                main.vals("set", main.pass, "true", "true");
+
+                socket.emit("getdata", main.Validate());
+
+                document.getElementById("leftPage").addEventListener("click", (event) => {
+                    var currentPage = document.URL.split("?")[1];
+                    if (currentPage.includes("&")) {
+                        currentPage = currentPage.substr(0, currentPage.indexOf("&"));
+                    }
+                    currentPage = currentPage.split("=")[1];
+                    console.log(currentPage)
+                    var toPage = parseInt(currentPage) - 1;
+                    if (toPage != 0) {
+                        window.location = "http://benshandelsonderneming.nl/StorageManagement/html/index.html?page=" + toPage
+                            .toString() + "&pass=" + main.pass;
+                    }
+                })
+
+                document.getElementById("rightPage").addEventListener("click", (event) => {
+                    var currentPage = document.URL.split("?")[1];
+                    if (currentPage.includes("&")) {
+                        currentPage = currentPage.substr(0, currentPage.indexOf("&"));
+                    }
+                    currentPage = currentPage.split("=")[1];
+                    console.log(currentPage)
+                    var toPage = parseInt(currentPage) + 1;
+                    window.location = "http://benshandelsonderneming.nl/StorageManagement/html/index.html?page=" + toPage
+                    .toString() + "&pass=" + main.pass;
+                })
+
+                socket.on("callbackGetData", (data) => {
+                    console.log("DATA !!");
+                    var params = document.URL.split("?");
+                    var multiArray = params[1].split("&");
+
+                    if (params[1].split("=")[1].includes("&")) {
+                        params = params[1].split("=")[1].split("&")[0];
+                    } else {
+                        params = params[1].split("=")[1];
+                    }
+
+                    var forI = parseInt(params) == 1 ? forI = 0 : forI = (parseInt(params) - 1) *
+                        MAX_PRODUCTS_ON_PAGE;
+                    console.log(forI);
+                    console.log(params);
+                    for (i = forI; i < parseInt(params) * MAX_PRODUCTS_ON_PAGE; i++) {
+                        if (data[i] != undefined) {
+                            console.log(data[i]);
+                            var split = data[i].split(">n<");
+                            main.AppendProduct(split[0], split[1]);
+                        }
+                    }
+                    console.log("before sleep");
+                    var sleep = new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            console.log("slept")
+                            resolve("done");
+                        }, 1000)
+                    }).then((data) => {
+                        console.log("GOING HERE")
+                        var modal2 = document.getElementById("changeProductModal");
+                        var productbuttons = document.getElementsByClassName("productbtn");
+                        var editbuttons = document.getElementsByClassName("editbtn");
+                        for (i = 0; i < productbuttons.length; i++) {
+                            productbuttons.item(i).addEventListener("click", (event) => {
+                                console.log(event.srcElement);
+                                var btn = event.srcElement;
+
+                                var text = btn.parentElement.children[0].innerText;
+                                var stock = btn.parentElement.children[1].placeholder
+                                    .split(" ")[0];
+
+                                var newStock = btn.parentElement.children[1].value;
+
+                                if (newStock.length >= 1) {
+
+                                    text = text.replace(/ /g, ">nbsp<");
+
+                                    btn.classList.remove("btn-info");
+
+
+
+                                    socket.emit("changeProduct", {
+                                        validation: main.Validate("hashed"),
+                                        old: text + ">n<" + stock,
+                                        change: text + ">n<" + newStock
+                                    })
+
+                                    btn.classList.add("btn-success");
+
+                                    var sleep = new Promise((resolve, reject) => {
+                                        setTimeout(() => {
+                                            resolve("done");
+                                        }, 1000)
+                                    }).then((data) => {
+                                        btn.classList.remove("btn-success");
+
+
+                                        btn.classList.add("btn-info");
+                                    })
+                                } else {
+                                    btn.classList.add("btn-danger");
+
+                                    var sleep = new Promise((resolve, reject) => {
+                                        setTimeout(() => {
+                                            resolve("done");
+                                        }, 1000)
+                                    }).then((data) => {
+                                        btn.classList.remove("btn-danger");
+
+
+                                        btn.classList.add("btn-info");
+                                    })
+                                }
+                            })
+                        }
+                        for (i = 0; i < editbuttons.length; i++) {
+                            editbuttons.item(i).addEventListener("click", (event) => {
+                                console.log(event)
+                                var btn = event.srcElement;
+                                modal2.selectedElement = main.reverseFormula(main
+                                    .getHeight(btn));
+                                console.log(btn)
+
+                                btn.classList.remove("btn-danger");
+
+                                modal2.style.display = "block";
+
+                                btn.classList.add("btn-success");
+
+                                var sleep = new Promise((resolve, reject) => {
+                                    setTimeout(() => {
+                                        resolve("done");
+                                    }, 1000)
+                                }).then((data) => {
+                                    btn.classList.remove("btn-success");
+
+
+                                    btn.classList.add("btn-danger");
+                                })
+                            })
+                        }
+                    })
+
+                })
+                var modal = document.getElementById("addProductModal");
+                var titel = document.getElementById("productTitle");
+                var amount = document.getElementById("productAmount");
+                document.getElementById("productaddbtn").addEventListener("click", (event) => {
+                    socket.emit("addProduct", {
+                        validation: main.Validate("hashed"),
+                        add: titel.value + ">n<" + amount.value
+                    })
+                    modal.style.display = 'none';
+                    console.log("emitted");
+                })
+
+                var modal2 = document.getElementById("changeProductModal")
+                var title = document.getElementById("changeTitle");
+                document.getElementById("productchangebtn").addEventListener("click", (event) => {
+                    var data = modal2.selectedElement;
+                    var oldName = main.getNameAtIndex(data);
+                    var oldStock = main.getStockAtIndex(data);
+
+                    var newName = title.value;
+
+                    newName = newName.replace(/ /g, ">nbsp<");
+                    oldName = oldName.replace(/ /g, ">nbsp<");
+
+                    console.log(oldName)
+
+                    socket.emit("changeProduct", {
+                        validation: main.Validate("hashed"),
+                        change: newName + ">n<" + oldStock,
+                        old: oldName + ">n<" + oldStock
+                    });
+                    modal2.style.display = "none";
+                })
+
+
+                socket.on("reload", (data) => {
+                    console.log(data);
+                    main.DeleteProducts();
+                    socket.emit("getdata", main.Validate());
+                })
+
+                document.getElementById("deleteButton").addEventListener("click", (event) => {
+                    var prdctname = main.getNameAtIndex(modal2.selectedElement);
+                    var prdctstock = main.getStockAtIndex(modal2.selectedElement);
+
+                    prdctname = prdctname.replace(/ /g, ">nbsp<");
+
+                    var todelete = prdctname + ">n<" + prdctstock;
+
+                    modal2.style.display = "none";
+
+                    socket.emit("deleteProduct", {
+                        validation: main.Validate("hashed"),
+                        delete: todelete
+                    })
+                })
+
+
+            } else {
+                document.getElementById("LoginButton").classList.remove("btn-primary");
+                document.getElementById("LoginButton").classList.add("btn-danger");
+            }
+        });
+
+        if (pass.length >= 1) {
+            document.getElementById("LoginButton").click();
+        }
+    </script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("addProductModal");
+        var modal2 = document.getElementById("changeProductModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("addProduct");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        var span2 = document.getElementsByClassName("close")[1];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        span2.onclick = function () {
+            modal2.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            } else if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
