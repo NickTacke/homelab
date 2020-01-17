@@ -10,3 +10,5 @@
 // resolve-aliases
 
 // annotate-inventory
+
+// annotate-lifecycle
