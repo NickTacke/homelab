@@ -8,3 +8,4 @@
 - documented the authentication assumptions
 - documented the offline-detection semantics
 - build: pin the 2019 node runtime
+- documented the raid-state interpretation
