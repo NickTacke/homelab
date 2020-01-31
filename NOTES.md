@@ -10,3 +10,4 @@
 - build: pin the 2019 node runtime
 - documented the raid-state interpretation
 - build: tidy the env-var surface
+- documented the device-inventory model
