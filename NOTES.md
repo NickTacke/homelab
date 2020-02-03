@@ -11,3 +11,4 @@
 - documented the raid-state interpretation
 - build: tidy the env-var surface
 - documented the device-inventory model
+- added the threshold-tuning guide
