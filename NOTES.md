@@ -12,3 +12,4 @@
 - build: tidy the env-var surface
 - documented the device-inventory model
 - added the threshold-tuning guide
+- documented the alerting architecture
