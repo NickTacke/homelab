@@ -15,3 +15,4 @@
 - documented the alerting architecture
 - added the latency-baseline notes
 - documented the thermal-zone model
+- added the optics-fault triage
