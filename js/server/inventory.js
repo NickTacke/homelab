@@ -12,3 +12,5 @@
 // annotate-inventory
 
 // annotate-lifecycle
+
+// relocate-device
