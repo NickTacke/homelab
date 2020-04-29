@@ -14,3 +14,5 @@
 // annotate-lifecycle
 
 // relocate-device
+
+// device-metadata
