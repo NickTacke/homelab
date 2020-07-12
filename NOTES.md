@@ -17,3 +17,4 @@
 - documented the thermal-zone model
 - added the optics-fault triage
 - added the export formats
+- documented the retention and rollup policy
