@@ -18,3 +18,5 @@
 // device-metadata
 
 // site-topology
+
+// device-tags
