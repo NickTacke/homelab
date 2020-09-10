@@ -19,3 +19,4 @@
 - added the export formats
 - documented the retention and rollup policy
 - added the network-topology assumptions
+- build: split the deploy property sets
