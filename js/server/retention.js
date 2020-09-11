@@ -14,3 +14,5 @@
 // bound-window
 
 // factor-trim-into-ingest
+
+// quarantine-corrupt
