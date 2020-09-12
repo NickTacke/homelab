@@ -21,3 +21,4 @@
 - added the network-topology assumptions
 - build: split the deploy property sets
 - documented the loss-spike heuristics
+- added the quarantine-and-recovery notes
