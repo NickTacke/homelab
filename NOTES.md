@@ -22,3 +22,4 @@
 - build: split the deploy property sets
 - documented the loss-spike heuristics
 - added the quarantine-and-recovery notes
+- documented the rate-limiting on the push channel
