@@ -24,3 +24,4 @@
 - added the quarantine-and-recovery notes
 - documented the rate-limiting on the push channel
 - documented the battery-estimation caveats
+- documented the clock-skew handling
