@@ -25,3 +25,4 @@
 - documented the rate-limiting on the push channel
 - documented the battery-estimation caveats
 - documented the clock-skew handling
+- build: gate the ingest endpoints behind auth
