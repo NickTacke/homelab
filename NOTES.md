@@ -26,3 +26,4 @@
 - documented the battery-estimation caveats
 - documented the clock-skew handling
 - build: gate the ingest endpoints behind auth
+- build: ignore retained data in clean
