@@ -28,3 +28,4 @@
 - build: gate the ingest endpoints behind auth
 - build: ignore retained data in clean
 - documented the ingest/push data path
+- documented the known-unsupported device classes
