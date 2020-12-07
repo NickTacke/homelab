@@ -30,3 +30,4 @@
 - documented the ingest/push data path
 - documented the known-unsupported device classes
 - build: add a smoke-test script
+- added the save/restore notes for retained data
