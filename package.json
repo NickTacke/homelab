@@ -23,7 +23,7 @@
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "jshint": "^2.10.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "nodemon": "^1.19.4",
     "socket.io": "^2.3.0"
   }
